@@ -1,0 +1,20 @@
+{
+    "name": "crysalead/inflector",
+    "description": "Inflector Library",
+    "keywords": ["Inflection"],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4",
+        "crysalead/kahlan": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "inflector\\": "src/",
+            "inflector\\spec\\": "spec/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "dev"
+}

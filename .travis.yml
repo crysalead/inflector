@@ -1,0 +1,24 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - hhvm
+
+matrix:
+  allow_failures:
+    - php: hhvm
+  fast_finish: true
+
+before_script:
+  - git checkout master
+  - composer self-update && composer install
+
+script: bin/kahlan --config=kahlan-config.travis.php
+
+script: bin/kahlan --coverage=3 --scrutinizer="export.xml"
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover "export.xml"
