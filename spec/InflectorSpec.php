@@ -7,7 +7,7 @@ use kahlan\plugin\Stub;
 
 describe("Inflector", function() {
 
-    describe("transliterate", function() {
+    describe("->transliterate()", function() {
 
         it("transliterates a string", function() {
 
@@ -21,7 +21,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("slug", function() {
+    describe("->slug()", function() {
 
         it("slugs a string", function() {
             $result = Inflector::slug('Foo:Bar & Cie');
@@ -33,7 +33,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("parameterize", function() {
+    describe("->parameterize()", function() {
 
         it("parameterizes a string", function() {
             $result = Inflector::parameterize('Foo:Bar & Cie');
@@ -45,7 +45,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("underscore", function() {
+    describe("->underscore()", function() {
 
         it("underscores a string", function() {
 
@@ -58,7 +58,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("dasherize", function() {
+    describe("->dasherize()", function() {
 
         it("dasherizes a string", function() {
 
@@ -69,7 +69,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("camelize", function() {
+    describe("->camelize()", function() {
 
         it("camelizes a string", function() {
 
@@ -82,7 +82,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("camelback", function() {
+    describe("->camelback()", function() {
 
         it("camelbacks a string", function() {
 
@@ -95,7 +95,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("titleize", function() {
+    describe("->titleize()", function() {
 
         it("titleizes a string", function() {
 
@@ -108,7 +108,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("humanize", function() {
+    describe("->humanize()", function() {
 
         it("humanizes a string", function() {
 
@@ -122,7 +122,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("plural", function() {
+    describe("->plural()", function() {
 
         beforeEach(function() {
 
@@ -147,7 +147,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("singular", function() {
+    describe("->singular()", function() {
 
         beforeEach(function() {
 
@@ -172,7 +172,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("irregular", function() {
+    describe("->irregular()", function() {
 
         beforeEach(function() {
 
@@ -209,7 +209,7 @@ describe("Inflector", function() {
 
         });
 
-        describe("pluralize", function() {
+        describe("->pluralize()", function() {
 
             it("pluralizes empty word", function() {
 
@@ -303,7 +303,7 @@ describe("Inflector", function() {
 
         });
 
-        describe("singularize", function() {
+        describe("->singularize()", function() {
 
             it("singularizes empty word", function() {
 
@@ -393,7 +393,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("reset", function() {
+    describe("->reset()", function() {
 
         it("clears all the inflector rules", function() {
 
@@ -405,7 +405,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("load", function() {
+    describe("->load()", function() {
 
         it("loads the english inflection rules", function() {
 

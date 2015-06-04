@@ -11,13 +11,11 @@ The `Inflector` class is prepopulated with english inflections for singularizati
 - French (`'fr'`)
 - Spanish (`'es'`)
 
-
 ### Usage
 
 #### Examples of usage of the inflector with the `'auto'` locale (i.e english):
 
 ```php
-<?php
 
 use inflector\Inflector;
 
@@ -52,7 +50,7 @@ Inflector::parameterize('Foo:Bar & Cie', '_');      // "foo_bar_cie"
 
 Inflector::camelize('test_field');                  // "TestField"
 Inflector::camelize('TEST_FIELD');                  // "TestField"
-Inflector::camelize('my_name/space');               // "MyName\Space"
+Inflector::camelize('my_name\space');               // "MyName\Space"
 
 # camelback
 
@@ -62,7 +60,7 @@ Inflector::camelback('TEST_FIELD');                 // "testField"
 # underscore
 
 Inflector::underscore('TestField');                 // "test_field"
-Inflector::underscore('MyName\Space');              // "my_name/space"
+Inflector::underscore('MyName\Space');              // "my_name\space"
 Inflector::underscore('dashed-string');             // "dashed_string"
 
 # dasherize
@@ -86,7 +84,6 @@ Inflector::titleize('raiders_of_the_lost_ark');     // "Raiders Of The Lost Ark"
 #### Examples of usage of custom locales:
 
 ```php
-<?php
 
 namespace inflector\Inflector;
 

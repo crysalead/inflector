@@ -55,7 +55,7 @@ class Inflector
     public static function underscore($word)
     {
         $underscored =  strtr(preg_replace('/(?<=\\w)([A-Z])/', '_\\1', $word), '-', '_');
-        return static::transliterate($underscored, 'Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove; Lower();');
+        return strtolower(static::transliterate($underscored));
     }
 
     /**
@@ -77,9 +77,9 @@ class Inflector
      * @param  string $replacement The replacement to use for spaces.
      * @return string              The converted string.
      */
-    public static function slug($string, $replacement = '-', $transliterator = 'Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove;')
+    public static function slug($string, $replacement = '-')
     {
-        $transliterated = static::transliterate($string, $transliterator);
+        $transliterated = static::transliterate($string);
         $spaced = preg_replace('/[^\w\s]/', ' ', $transliterated);
         return preg_replace('/\\s+/', $replacement, trim($spaced));
     }
@@ -92,10 +92,10 @@ class Inflector
      * @param  string $replacement The replacement to use for spaces.
      * @return string              The converted lowercased string.
      */
-    public static function parameterize($string, $replacement = '-', $transliterator = 'Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove; Lower();')
+    public static function parameterize($string, $replacement = '-')
     {
-        $transliterated = static::transliterate($string, $transliterator);
-        return static::slug($string, $replacement, $transliterator);
+        $transliterated = static::transliterate($string);
+        return strtolower(static::slug($string, $replacement));
     }
 
     /**
@@ -252,7 +252,7 @@ class Inflector
      * @param  string $transliterator
      * @return string
      */
-    public static function transliterate($string, $transliterator = 'Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove;')
+    public static function transliterate($string, $transliterator = "Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove;")
     {
         return transliterator_transliterate($transliterator, $string);
     }
