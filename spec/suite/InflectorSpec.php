@@ -1,5 +1,5 @@
 <?php
-namespace inflector\spec\util;
+namespace inflector\spec\suite;
 
 use inflector\InflectorException;
 use inflector\Inflector;
@@ -7,7 +7,7 @@ use kahlan\plugin\Stub;
 
 describe("Inflector", function() {
 
-    describe("->transliterate()", function() {
+    describe("::transliterate()", function() {
 
         it("transliterates a string", function() {
 
@@ -21,7 +21,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("->slug()", function() {
+    describe("::slug()", function() {
 
         it("slugs a string", function() {
             $result = Inflector::slug('Foo:Bar & Cie');
@@ -33,7 +33,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("->parameterize()", function() {
+    describe("::parameterize()", function() {
 
         it("parameterizes a string", function() {
             $result = Inflector::parameterize('Foo:Bar & Cie');
@@ -45,7 +45,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("->underscore()", function() {
+    describe("::underscore()", function() {
 
         it("underscores a string", function() {
 
@@ -58,7 +58,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("->dasherize()", function() {
+    describe("::dasherize()", function() {
 
         it("dasherizes a string", function() {
 
@@ -69,7 +69,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("->camelize()", function() {
+    describe("::camelize()", function() {
 
         it("camelizes a string", function() {
 
@@ -82,7 +82,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("->camelback()", function() {
+    describe("::camelback()", function() {
 
         it("camelbacks a string", function() {
 
@@ -95,7 +95,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("->titleize()", function() {
+    describe("::titleize()", function() {
 
         it("titleizes a string", function() {
 
@@ -108,7 +108,7 @@ describe("Inflector", function() {
 
     });
 
-    describe("->humanize()", function() {
+    describe("::humanize()", function() {
 
         it("humanizes a string", function() {
 
@@ -122,13 +122,10 @@ describe("Inflector", function() {
 
     });
 
-    describe("->plural()", function() {
+    describe("::plural()", function() {
 
         beforeEach(function() {
-
             Inflector::reset();
-            Inflector::load();
-
         });
 
         it("adds a new pluralization rule", function() {
@@ -147,13 +144,10 @@ describe("Inflector", function() {
 
     });
 
-    describe("->singular()", function() {
+    describe("::singular()", function() {
 
         beforeEach(function() {
-
             Inflector::reset();
-            Inflector::load();
-
         });
 
         it("adds a new singularization rule", function() {
@@ -172,13 +166,10 @@ describe("Inflector", function() {
 
     });
 
-    describe("->irregular()", function() {
+    describe("::irregular()", function() {
 
         beforeEach(function() {
-
             Inflector::reset();
-            Inflector::load();
-
         });
 
         it("adds a new irregularity", function() {
@@ -200,16 +191,13 @@ describe("Inflector", function() {
 
     });
 
-    context("using english", function() {
+    context("using `'default'`", function() {
 
         beforeEach(function() {
-
             Inflector::reset();
-            Inflector::load();
-
         });
 
-        describe("->pluralize()", function() {
+        describe("::pluralize()", function() {
 
             it("pluralizes empty word", function() {
 
@@ -303,7 +291,7 @@ describe("Inflector", function() {
 
         });
 
-        describe("->singularize()", function() {
+        describe("::singularize()", function() {
 
             it("singularizes empty word", function() {
 
@@ -393,11 +381,19 @@ describe("Inflector", function() {
 
     });
 
-    describe("->reset()", function() {
+    describe("::reset()", function() {
+
+        it("reset the inflector rules", function() {
+
+            Inflector::reset();
+            expect(Inflector::singularize('posts'))->toBe('post');
+            expect(Inflector::pluralize('post'))->toBe('posts');
+
+        });
 
         it("clears all the inflector rules", function() {
 
-            Inflector::reset();
+            Inflector::reset(true);
             expect(Inflector::singularize('posts'))->toBe('posts');
             expect(Inflector::pluralize('post'))->toBe('post');
 
@@ -405,75 +401,32 @@ describe("Inflector", function() {
 
     });
 
-    describe("->load()", function() {
+    context("using a custom language", function() {
 
-        it("loads the english inflection rules", function() {
+        describe("::singularize/pluralize()", function() {
 
-            Inflector::load();
-            expect(Inflector::singularize('posts'))->toBe('post');
-            expect(Inflector::pluralize('post'))->toBe('posts');
+            it("can manages several languages", function() {
 
-        });
+                Inflector::reset();
+                require('spec/fixture/fr.php');
+                require('spec/fixture/es.php');
 
-        it("loads the french inflection rules", function() {
+                expect(Inflector::singularize('taxes'))->toBe('tax');
+                expect(Inflector::pluralize('tax'))->toBe('taxes');
 
-            Inflector::load('fr');
-            expect(Inflector::singularize('bateaux', 'fr'))->toBe('bateau');
-            expect(Inflector::pluralize('bateau', 'fr'))->toBe('bateaux');
+                expect(Inflector::singularize('bateaux', 'fr'))->toBe('bateau');
+                expect(Inflector::pluralize('bateau', 'fr'))->toBe('bateaux');
 
-        });
+                expect(Inflector::singularize('ediciones', 'es'))->toBe('edición');
+                expect(Inflector::pluralize('edición', 'es'))->toBe('ediciones');
 
-        it("loads the spanish inflection rules", function() {
-
-            Inflector::load('es');
-            expect(Inflector::singularize('ediciones', 'es'))->toBe('edición');
-            expect(Inflector::pluralize('edición', 'es'))->toBe('ediciones');
-
-        });
-
-        it("loads inflection rules from a closure definition", function() {
-
-            Inflector::load('zz', function() {
                 Inflector::singular('/x$/i', '', 'zz');
                 Inflector::plural('/([^x])$/i', '\1x', 'zz');
+
+                expect(Inflector::singularize('abcdefx', 'zz'))->toBe('abcdef');
+                expect(Inflector::pluralize('abcdef', 'zz'))->toBe('abcdefx');
+
             });
-            expect(Inflector::singularize('abcdefx', 'zz'))->toBe('abcdef');
-            expect(Inflector::pluralize('abcdef', 'zz'))->toBe('abcdefx');
-
-        });
-
-        it("loads the english, french and spanish inflection rules", function() {
-
-            Inflector::load();
-            Inflector::load('fr');
-            Inflector::load('es');
-
-            expect(Inflector::singularize('taxes'))->toBe('tax');
-            expect(Inflector::pluralize('tax'))->toBe('taxes');
-
-            expect(Inflector::singularize('bateaux', 'fr'))->toBe('bateau');
-            expect(Inflector::pluralize('bateau', 'fr'))->toBe('bateaux');
-
-            expect(Inflector::singularize('ediciones', 'es'))->toBe('edición');
-            expect(Inflector::pluralize('edición', 'es'))->toBe('ediciones');
-
-        });
-
-        it("returns an exception for invalid locales", function() {
-
-            $closure = function() {
-                Inflector::load("goa'uld");
-            };
-            expect($closure)->toThrow(new InflectorException("Error, unable to load the `'goa'uld'` locale ."));
-
-        });
-
-        it("returns an exception for invalid closures", function() {
-
-            $closure = function() {
-                Inflector::load("auto", "not/a/closure");
-            };
-            expect($closure)->toThrow(new InflectorException("Error, unable to load the `'auto'` locale ."));
 
         });
 

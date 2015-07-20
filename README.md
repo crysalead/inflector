@@ -1,19 +1,16 @@
 # Inflector - Inflector library
 
-[![Build Status](https://travis-ci.org/crysalead/inflector.png?branch=master)](https://travis-ci.org/crysalead/inflector) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/crysalead/inflector/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/crysalead/inflector/) [![Code Coverage](https://scrutinizer-ci.com/g/crysalead/inflector/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/crysalead/inflector/)
+[![Build Status](https://travis-ci.org/crysalead/inflector.png?branch=master)](https://travis-ci.org/crysalead/inflector)
+[![Code Coverage](https://scrutinizer-ci.com/g/crysalead/inflector/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/crysalead/inflector/)
 
 Inflector is a small library that can perform string transformation like singularization, pluralization, underscore to camel case, titelize words
 and more. Inflections can be localized.
 
 The `Inflector` class is prepopulated with english inflections for singularization and pluralization to be ready to use.
 
-- English (`'auto'`)
-- French (`'fr'`)
-- Spanish (`'es'`)
-
 ### Usage
 
-#### Examples of usage of the inflector with the `'auto'` locale (i.e english):
+#### Examples of usage of the inflector with the `'default'` locale (i.e english):
 
 ```php
 
@@ -89,29 +86,31 @@ namespace inflector\Inflector;
 
 Inflector::pluralize('child');                       // "children"
 
-//Load default `'fr'` locale
-Inflector::load('fr');
-Inflector::pluralize('bateau', 'fr');                // "bateaux"
-
-//Load default `'es'` locale
-Inflector::load('es');
-Inflector::singularize('edición', 'es');             // "ediciones"
-
-
 //Load custom definition for `'zz'` locale using a closure
-Inflector::load('zz', fuction() {
-	Inflector::singular('/x$/i', '', 'zz');
-    Inflector::plural('/([^x])$/i', '\1x', 'zz');
-});
+Inflector::singular('/x$/i', '', 'zz');
+Inflector::plural('/([^x])$/i', '\1x', 'zz');
+
 Inflector::singularize('abcdefx', 'zz');             // "abcdef"
 Inflector::pluralize('abcdef', 'zz');                // "abcdefx"
 ```
 
+If you wan't to use an other language by default for inflections, you can override the `'default'` rules directly.
+
+```php
+Inflector::reset(true); // Remove all loaded inflection rules.
+
+Inflector::singular('/x$/i', '', 'default');
+Inflector::plural('/([^x])$/i', '\1x', 'default');
+
+Inflector::singularize('abcdefx');             // "abcdef"
+Inflector::pluralize('abcdef');                // "abcdefx"
+```
+
+Note: you can check [spec/fixture](https://github.com/crysalead/inflector/tree/master/spec/fixture) for some examples of inflection rules for spanish and french languages.
 
 ### Requirement
 
 Requires PHP >= 5.4.
-
 
 ### Installation with Composer
 
@@ -120,20 +119,16 @@ Create a `composer.json` file and run `composer install` command to install it:
 
 ```json
 {
-	"minimum-stability": "dev",
 	"require":
 	{
-		"crysalead/inflector": "*"
+		"crysalead/inflector": "~1.0"
 	}
 }
 ```
 
-
 ### Testing
 
-
 The spec suite can be runned with:
-
 
 ```
 cd inflector
@@ -142,7 +137,6 @@ composer install
 ```
 
 PS: [Composer](http://getcomposer.org/) need to be present on your system.
-
 
 ### Acknowledgements
 
