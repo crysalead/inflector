@@ -1,5 +1,5 @@
 <?php
-use inflector\Inflector;
+use Lead\Inflector\Inflector;
 
 Inflector::singular('/s$/i', '', 'es');
 Inflector::plural('/$/i', 's', 'es');

@@ -1,9 +1,10 @@
 <?php
-namespace inflector\spec\suite;
+namespace Lead\Inflector\Spec\Suite;
 
-use inflector\InflectorException;
-use inflector\Inflector;
-use kahlan\plugin\Stub;
+use Lead\Inflector\InflectorException;
+use Lead\Inflector\Inflector;
+
+use Kahlan\Plugin\Stub;
 
 describe("Inflector", function() {
 
@@ -408,8 +409,8 @@ describe("Inflector", function() {
             it("can manages several languages", function() {
 
                 Inflector::reset();
-                require('spec/fixture/fr.php');
-                require('spec/fixture/es.php');
+                require('spec/Fixture/fr.php');
+                require('spec/Fixture/es.php');
 
                 expect(Inflector::singularize('taxes'))->toBe('tax');
                 expect(Inflector::pluralize('tax'))->toBe('taxes');

@@ -1,5 +1,5 @@
 <?php
-namespace inflector;
+namespace Lead\Inflector;
 
 class Inflector
 {

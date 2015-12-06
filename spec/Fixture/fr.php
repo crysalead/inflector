@@ -1,5 +1,5 @@
 <?php
-use inflector\Inflector;
+use Lead\Inflector\Inflector;
 
 Inflector::singular('/s$/i', '', 'fr');
 Inflector::plural('/([^s])$/i', '\1s', 'fr');

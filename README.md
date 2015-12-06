@@ -14,7 +14,7 @@ The `Inflector` class is prepopulated with english inflections for singularizati
 
 ```php
 
-use inflector\Inflector;
+use Lead\Inflector\Inflector;
 
 # pluralize
 

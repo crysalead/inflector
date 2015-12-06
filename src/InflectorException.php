@@ -1,5 +1,5 @@
 <?php
-namespace inflector;
+namespace Lead\Inflector;
 
 class InflectorException extends \RuntimeException
 {
