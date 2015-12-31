@@ -77,6 +77,7 @@ describe("Inflector", function() {
             expect(Inflector::camelize('test-field'))->toBe('TestField');
             expect(Inflector::camelize('test_field'))->toBe('TestField');
             expect(Inflector::camelize('TEST_FIELD'))->toBe('TestField');
+            expect(Inflector::camelize('TestField'))->toBe('TestField');
             expect(Inflector::camelize('my_name\space'))->toBe('MyName\Space');
 
         });
@@ -90,6 +91,7 @@ describe("Inflector", function() {
             expect(Inflector::camelback('test-field'))->toBe('testField');
             expect(Inflector::camelback('test field'))->toBe('testField');
             expect(Inflector::camelback('TEST_FIELD'))->toBe('testField');
+            expect(Inflector::camelback('TestField'))->toBe('testField');
             expect(Inflector::camelback('my_name\space'))->toBe('myName\Space');
 
         });

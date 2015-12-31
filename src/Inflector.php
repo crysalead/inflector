@@ -31,6 +31,7 @@ class Inflector
         $upper = function($matches) {
             return strtoupper($matches[0]);
         };
+        $word = preg_replace('/([a-z])([A-Z])/', '$1_$2', $word);
         $camelized = str_replace(' ', '', ucwords(str_replace(['_', '-'], ' ', strtolower($word))));
         return preg_replace_callback('/(\\\[a-z])/', $upper, $camelized);
     }
