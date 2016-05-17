@@ -225,7 +225,7 @@ class Inflector
     {
         $rules = !is_array($singular) ? [$singular => $plural] : $singular;
 
-        $len = min(mb_strlen($singular), mb_strlen($plural));
+        $len = min(strlen($singular), strlen($plural));
 
         $prefix = '';
         $index = 0;
