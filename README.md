@@ -110,7 +110,11 @@ Note: you can check [spec/fixture](https://github.com/crysalead/inflector/tree/m
 
 ### Requirement
 
-Requires PHP >= 5.4.
+Requires PHP >= 5.4 and the PECL intl extension.
+
+```
+sudo apt-get install php-intl
+```
 
 ### Installation with Composer
 
